@@ -65,7 +65,16 @@ static void MX_ADC1_Init(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+	{
+		uint32_t value[3];
+		if (hadc->Instance == ADC1)
+		{
+			value[0] = ADC_BUF[0];
+			value[1] = ADC_BUF[1];
+			value[2] = ADC_BUF[2];
+		}
+	}
 /* USER CODE END 0 */
 
 /**
@@ -101,7 +110,8 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t *)ADC_BUF, 3);
-	HAL_ADC_Start_It(&hadc1);
+	HAL_ADC_Start_IT(&hadc1);
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -109,7 +119,7 @@ int main(void)
   while (1)
   {
 		HAL_GPIO_TogglePin (GPIOA, GPIO_PIN_5);
-		HAL_ADC_Start_It(&hadc1);
+		HAL_ADC_Start_IT(&hadc1);
 
 		HAL_Delay (1000);
   /* USER CODE END WHILE */
