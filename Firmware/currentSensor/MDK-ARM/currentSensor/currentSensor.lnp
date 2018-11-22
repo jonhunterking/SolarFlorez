@@ -1,0 +1,26 @@
+--cpu=Cortex-M4.fp
+"currentsensor\startup_stm32f302x8.o"
+"currentsensor\main.o"
+"currentsensor\stm32f3xx_it.o"
+"currentsensor\stm32f3xx_hal_msp.o"
+"currentsensor\stm32f3xx_hal_adc.o"
+"currentsensor\stm32f3xx_hal_adc_ex.o"
+"currentsensor\stm32f3xx_hal_tim.o"
+"currentsensor\stm32f3xx_hal_tim_ex.o"
+"currentsensor\stm32f3xx_hal.o"
+"currentsensor\stm32f3xx_hal_rcc.o"
+"currentsensor\stm32f3xx_hal_rcc_ex.o"
+"currentsensor\stm32f3xx_hal_gpio.o"
+"currentsensor\stm32f3xx_hal_dma.o"
+"currentsensor\stm32f3xx_hal_cortex.o"
+"currentsensor\stm32f3xx_hal_pwr.o"
+"currentsensor\stm32f3xx_hal_pwr_ex.o"
+"currentsensor\stm32f3xx_hal_flash.o"
+"currentsensor\stm32f3xx_hal_flash_ex.o"
+"currentsensor\stm32f3xx_hal_i2c.o"
+"currentsensor\stm32f3xx_hal_i2c_ex.o"
+"currentsensor\system_stm32f3xx.o"
+--library_type=microlib --strict --scatter "currentSensor\currentSensor.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "currentSensor.map" -o currentSensor\currentSensor.axf
