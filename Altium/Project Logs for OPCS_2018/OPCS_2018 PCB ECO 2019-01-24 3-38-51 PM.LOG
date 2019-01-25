@@ -1,0 +1,9 @@
+Change Component Footprint: Designator=U14 Old Footprint=STMicroelectronics VN7007 E-Fuse New Footprint=STMicroelectronics OCTAPAK
+Added Pin To Net: NetName=V_BAT_FUSED Pin=U14-1
+Added Pin To Net: NetName=V_BAT_FUSED Pin=U14-2
+Added Pin To Net: NetName=V_BAT_FUSED Pin=U14-3
+Added Pin To Net: NetName=NetR22_1 Pin=U14-4
+Added Pin To Net: NetName=NetR23_1 Pin=U14-5
+Added Pin To Net: NetName=NetR21_1 Pin=U14-6
+Added Pin To Net: NetName=+3.3V_A Pin=U14-7
+Added Pin To Net: NetName=V_BAT Pin=U14-8

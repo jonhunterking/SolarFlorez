@@ -1,0 +1,6 @@
+Added Component: Designator=C20(Johanson S-Series (1608))
+Added Component: Designator=C21(Johanson S-Series (1608))
+Added Pin To Net: NetName=OSC_IN Pin=C20-1
+Added Pin To Net: NetName=+3.3V_A Pin=C20-2
+Added Pin To Net: NetName=NetC21_1 Pin=C21-1
+Added Pin To Net: NetName=+3.3V_A Pin=C21-2

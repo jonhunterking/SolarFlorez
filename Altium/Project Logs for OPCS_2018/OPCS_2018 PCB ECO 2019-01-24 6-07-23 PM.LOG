@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=D9 Old Footprint=Bourns Inc. SMBJ Series (DO-214AA) New Footprint=Cree CLVBA-FKA-Series (4-SOJ)
+Added Pin To Net: NetName=NetD9_3 Pin=D9-3
+Added Pin To Net: NetName=NetD9_4 Pin=D9-4
