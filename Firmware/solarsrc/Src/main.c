@@ -118,12 +118,10 @@ int main(void)
 	// start pwm
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
-	//htim1.Instance->CCR1 = 40;
-	//htim2.Instance->CCR4 = 60;
 
-	//HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-	//HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-	//htim1.Instance->CCR2 = 40;
+
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
 	
 	
 	uint32_t pv_current_sampled;
@@ -132,12 +130,27 @@ int main(void)
 	uint32_t pv_power_new = 0;
 	uint32_t pv_power_old = 0;
 	uint32_t pwm_tmp = 50;
+	uint32_t voltage= ((float)ADC_BUF[0]/4096)*3.6;
+  uint32_t i;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-  {/*
+  {
+		for(i=10; i<90; i++)
+		{
+			updateDutyCycle(i, TIM_CHANNEL_1);
+			//htim1.Instance->CCR1 = i;
+			HAL_Delay(100);
+		}
+		for(i=90; i>=10; i--){
+			//htim1.Instance->CCR1 = i;
+			updateDutyCycle(i, TIM_CHANNEL_1);
+			HAL_Delay(100);			
+		}
+		/*
+		
 		pv_current_sampled = sample_pv_current();
 		pv_voltage_sampled_new = sample_pv_voltage();
 		pv_power_new = pv_current_sampled * pv_voltage_sampled_old;
@@ -248,7 +261,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
   hadc1.Init.NbrOfConversion = 5;
   hadc1.Init.DMAContinuousRequests = ENABLE;
-  hadc1.Init.EOCSelection = ADC_EOC_SEQ_CONV;
+  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   hadc1.Init.LowPowerAutoWait = DISABLE;
   hadc1.Init.Overrun = ADC_OVR_DATA_OVERWRITTEN;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
@@ -271,33 +284,8 @@ static void MX_ADC1_Init(void)
 
     /**Configure Regular Channel 
     */
+  sConfig.Channel = ADC_CHANNEL_2;
   sConfig.Rank = ADC_REGULAR_RANK_2;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    _Error_Handler(__FILE__, __LINE__);
-  }
-
-    /**Configure Regular Channel 
-    */
-  sConfig.Rank = ADC_REGULAR_RANK_3;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    _Error_Handler(__FILE__, __LINE__);
-  }
-
-    /**Configure Regular Channel 
-    */
-  sConfig.Rank = ADC_REGULAR_RANK_4;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    _Error_Handler(__FILE__, __LINE__);
-  }
-
-    /**Configure Regular Channel 
-    */
-  sConfig.Rank = ADC_REGULAR_RANK_5;
-  sConfig.SamplingTime = ADC_SAMPLETIME_601CYCLES_5;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -307,7 +295,6 @@ static void MX_ADC1_Init(void)
     */
   sConfig.Channel = ADC_CHANNEL_9;
   sConfig.Rank = ADC_REGULAR_RANK_3;
-  sConfig.SamplingTime = ADC_SAMPLETIME_61CYCLES_5;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -385,6 +372,7 @@ static void MX_TIM1_Init(void)
     _Error_Handler(__FILE__, __LINE__);
   }
 
+  sConfigOC.Pulse = 71;
   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -476,6 +464,24 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void updateDutyCycle(uint32_t duty, uint32_t Channel){
+	uint32_t pulse;
+	//TIM_OC_InitTypeDef sConfigOC;
+	pulse = ((htim1.Init.Period + 1) * duty) / 100 - 1;
+	/*sConfigOC.Pulse = pulse;
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+  sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, Channel) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }*/
+	__HAL_TIM_SET_COMPARE(&htim1, Channel, pulse);
+
+}
 
 /* USER CODE END 4 */
 
