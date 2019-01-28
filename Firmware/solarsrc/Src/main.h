@@ -1,6 +1,7 @@
 #include <stdint.h>
 
 uint32_t ADC_BUF[5];
+float ADC1_conv;
 /*extern uint32_t *PV_current = &ADC_BUF[0];
 extern uint32_t *PV_voltage = &ADC_BUF[1];
 extern uint32_t *boost_out_voltage = &ADC_BUF[2];

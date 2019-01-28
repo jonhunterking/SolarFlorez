@@ -274,7 +274,7 @@ static void MX_ADC1_Init(void)
   sConfig.Channel = ADC_CHANNEL_1;
   sConfig.Rank = ADC_REGULAR_RANK_1;
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
-  sConfig.SamplingTime = ADC_SAMPLETIME_61CYCLES_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_601CYCLES_5;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
@@ -466,23 +466,15 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void updateDutyCycle(uint32_t duty, uint32_t Channel){
 	uint32_t pulse;
-	//TIM_OC_InitTypeDef sConfigOC;
 	pulse = ((htim1.Init.Period + 1) * duty) / 100 - 1;
-	/*sConfigOC.Pulse = pulse;
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
-  sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, Channel) != HAL_OK)
-  {
-    _Error_Handler(__FILE__, __LINE__);
-  }*/
 	__HAL_TIM_SET_COMPARE(&htim1, Channel, pulse);
 
 }
 
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle){
+	ADC1_conv = ((float)ADC_BUF[0]/4096.)*3.6;
+
+}
 /* USER CODE END 4 */
 
 /**
