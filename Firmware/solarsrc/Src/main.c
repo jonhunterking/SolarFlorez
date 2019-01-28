@@ -111,20 +111,20 @@ int main(void)
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 	//start time
-	HAL_TIM_Base_Start(&htim1); 
+	//HAL_TIM_Base_Start(&htim1); 
 
  //start adc as dma
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)ADC_BUF, 5);
 	// start pwm
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
-	htim2.Instance->CCR3 = 40;
-	htim2.Instance->CCR4 = 60;
+	//htim1.Instance->CCR1 = 40;
+	//htim2.Instance->CCR4 = 60;
 
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-	htim2.Instance->CCR3 = 40;
-	htim2.Instance->CCR4 = 60;
+	//HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+	//HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
+	//htim1.Instance->CCR2 = 40;
+	
 	
 	uint32_t pv_current_sampled;
 	uint32_t pv_voltage_sampled_new = 0;
@@ -137,7 +137,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-  {
+  {/*
 		pv_current_sampled = sample_pv_current();
 		pv_voltage_sampled_new = sample_pv_voltage();
 		pv_power_new = pv_current_sampled * pv_voltage_sampled_old;
@@ -163,7 +163,7 @@ int main(void)
 		if(pwm_tmp<=10){
 			pwm_tmp = 10;
 		}
-		htim1.Instance->CCR1 = pwm_tmp; 
+		htim1.Instance->CCR1 = pwm_tmp; */
 		
   /* USER CODE END WHILE */
 
@@ -337,17 +337,29 @@ static void MX_ADC1_Init(void)
 static void MX_TIM1_Init(void)
 {
 
+  TIM_ClockConfigTypeDef sClockSourceConfig;
   TIM_MasterConfigTypeDef sMasterConfig;
   TIM_OC_InitTypeDef sConfigOC;
   TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig;
 
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 3;
+  htim1.Init.Prescaler = 4;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 0;
+  htim1.Init.Period = 79;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
-  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
   if (HAL_TIM_PWM_Init(&htim1) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -362,7 +374,7 @@ static void MX_TIM1_Init(void)
   }
 
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
+  sConfigOC.Pulse = 39;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
