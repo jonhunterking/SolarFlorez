@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=VIN_BOOST Pin=F1-1
+Removed Pin From Net: NetName=NetC46_1 Pin=F1-2
+Removed Pin From Net: NetName=VOUT_BUCK Pin=F2-1
+Removed Pin From Net: NetName=VOUT_BUCK_FUSE Pin=F2-2
+Added Component: Designator=F?(Eaton 1025HC Fuse 20-30A)
+Added Component: Designator=F?(Eaton 1025HC Fuse 40-50A)
+Added Pin To Net: NetName=VIN_BOOST Pin=F?-1
+Added Pin To Net: NetName=VOUT_BUCK Pin=F?-1
+Added Pin To Net: NetName=NetC46_1 Pin=F?-2
+Added Pin To Net: NetName=VOUT_BUCK_FUSE Pin=F?-2

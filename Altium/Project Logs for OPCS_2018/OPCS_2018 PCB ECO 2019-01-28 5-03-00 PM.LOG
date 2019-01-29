@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=C35 Old Footprint=Panasonic (2920) 1mF Capacitor EEFK_J16 New Footprint=PCAP_125x20
+Change Component Comment : Designator=U15 Old Comment=50A Current Sensor New Comment=Allegro ACS781 Current Sensor
+Change Component Comment : Designator=U18 Old Comment=100A Current Sensor New Comment=Allegro ACS781 Current Sensor
