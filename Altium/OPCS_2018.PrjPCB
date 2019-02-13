@@ -174,6 +174,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=HBOXCMRC
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for OPCS_2018\Design Rule Check - OPCS_2018.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Default Configuration
 ParameterCount=0
@@ -946,7 +950,7 @@ Type44=1
 Type45=1
 
 [Electrical Rules Check]
-Type1=1
+Type1=0
 Type2=1
 Type3=2
 Type4=1
@@ -1035,7 +1039,7 @@ Type86=2
 Type87=2
 Type88=2
 Type89=1
-Type90=1
+Type90=0
 Type91=3
 Type92=3
 Type93=2
@@ -1060,13 +1064,13 @@ Type111=1
 
 [ERC Connection Matrix]
 L1=NNNNNNNNNNNWNNNWW
-L2=NNWNNNNWWWNWNWNWN
+L2=NNWNNNNNWWNWNWNWN
 L3=NWEENEEEENEWNEEWN
 L4=NNENNNWEENNWNENWN
 L5=NNNNNNNNNNNNNNNNN
 L6=NNENNNNEENNWNENWN
 L7=NNEWNNWEENNWNENWN
-L8=NWEENEENEEENNEENN
+L8=NNEENEENEEENNEENN
 L9=NWEENEEEENEWNEEWW
 L10=NWNNNNNENNEWNNEWN
 L11=NNENNNNEEENWNENWN
