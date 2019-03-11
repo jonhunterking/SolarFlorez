@@ -1,0 +1,27 @@
+--cpu=Cortex-M4.fp
+"solarsrc\startup_stm32f302x8.o"
+"solarsrc\mppt.o"
+"solarsrc\main.o"
+"solarsrc\stm32f3xx_it.o"
+"solarsrc\stm32f3xx_hal_msp.o"
+"solarsrc\stm32f3xx_hal_adc.o"
+"solarsrc\stm32f3xx_hal_adc_ex.o"
+"solarsrc\stm32f3xx_hal_tim.o"
+"solarsrc\stm32f3xx_hal_tim_ex.o"
+"solarsrc\stm32f3xx_hal.o"
+"solarsrc\stm32f3xx_hal_rcc.o"
+"solarsrc\stm32f3xx_hal_rcc_ex.o"
+"solarsrc\stm32f3xx_hal_gpio.o"
+"solarsrc\stm32f3xx_hal_dma.o"
+"solarsrc\stm32f3xx_hal_cortex.o"
+"solarsrc\stm32f3xx_hal_pwr.o"
+"solarsrc\stm32f3xx_hal_pwr_ex.o"
+"solarsrc\stm32f3xx_hal_flash.o"
+"solarsrc\stm32f3xx_hal_flash_ex.o"
+"solarsrc\stm32f3xx_hal_i2c.o"
+"solarsrc\stm32f3xx_hal_i2c_ex.o"
+"solarsrc\system_stm32f3xx.o"
+--library_type=microlib --strict --scatter "solarsrc\solarsrc.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "solarsrc.map" -o solarsrc\solarsrc.axf
