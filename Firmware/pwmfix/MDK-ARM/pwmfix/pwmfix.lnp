@@ -1,0 +1,24 @@
+--cpu=Cortex-M4.fp
+"pwmfix\startup_stm32f302x8.o"
+"pwmfix\main.o"
+"pwmfix\stm32f3xx_it.o"
+"pwmfix\stm32f3xx_hal_msp.o"
+"pwmfix\stm32f3xx_hal_tim.o"
+"pwmfix\stm32f3xx_hal_tim_ex.o"
+"pwmfix\stm32f3xx_hal.o"
+"pwmfix\stm32f3xx_hal_rcc.o"
+"pwmfix\stm32f3xx_hal_rcc_ex.o"
+"pwmfix\stm32f3xx_hal_gpio.o"
+"pwmfix\stm32f3xx_hal_dma.o"
+"pwmfix\stm32f3xx_hal_cortex.o"
+"pwmfix\stm32f3xx_hal_pwr.o"
+"pwmfix\stm32f3xx_hal_pwr_ex.o"
+"pwmfix\stm32f3xx_hal_flash.o"
+"pwmfix\stm32f3xx_hal_flash_ex.o"
+"pwmfix\stm32f3xx_hal_i2c.o"
+"pwmfix\stm32f3xx_hal_i2c_ex.o"
+"pwmfix\system_stm32f3xx.o"
+--library_type=microlib --strict --scatter "pwmfix\pwmfix.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "pwmfix.map" -o pwmfix\pwmfix.axf
