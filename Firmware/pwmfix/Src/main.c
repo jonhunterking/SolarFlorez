@@ -41,7 +41,7 @@
 #include "stm32f3xx_hal.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "stdlib.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -68,7 +68,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-
+void updateDutyCycleBoost(int duty);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -118,6 +118,8 @@ int main(void)
 	HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_2);
 	
 	__HAL_TIM_ENABLE(&htim2);
+	
+	updateDutyCycleBoost(50);
 	
   /* USER CODE END 2 */
 
@@ -316,7 +318,7 @@ static void MX_TIM2_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
-sConfigOC.Pulse = 66;
+	sConfigOC.Pulse = 66;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_LOW;
   if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
   {
@@ -324,7 +326,6 @@ sConfigOC.Pulse = 66;
   }
 
   HAL_TIM_MspPostInit(&htim2);
-
 }
 
 /* TIM15 init function */
@@ -375,7 +376,7 @@ static void MX_TIM15_Init(void)
   }
 
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 65;
+  sConfigOC.Pulse = 66;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
@@ -421,6 +422,12 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void updateDutyCycleBoost(int duty){
+	uint32_t pulse;
+	pulse = ((htim2.Init.Period + 1) * abs(100-duty)) / 100 - 1;
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, pulse+1);
+	__HAL_TIM_SET_COMPARE(&htim15, TIM_CHANNEL_2, pulse);
+}
 
 /* USER CODE END 4 */
 

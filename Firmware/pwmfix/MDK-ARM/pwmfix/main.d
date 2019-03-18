@@ -29,3 +29,4 @@ pwmfix\main.o: ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h
 pwmfix\main.o: ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h
 pwmfix\main.o: ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h
 pwmfix\main.o: ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h
+pwmfix\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
