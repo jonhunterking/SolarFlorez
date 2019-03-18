@@ -497,11 +497,13 @@ void updateDutyCycle(int duty, uint32_t Channel){
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle){
-	pv_current_adc = ((float)ADC_BUF[0]/4096.f)*3.6f;
-	pv_voltage = (((float)ADC_BUF[1]/4096.f)*3.6f) * ((5100000.*357000.)/357000.);
-	boost_out_voltage = ((float)ADC_BUF[2]/4096.f)*3.6f * ((10000000.*383000.)/383000.);
-	buck_out_voltage = ((float)ADC_BUF[4]/4096.f)*3.6f * ((1000000.*2000000.)/200000.);
-	pv_current = 0.0379f*pv_current_adc + 0.0012f;
+	pv_current_adc = ((float)ADC_BUF[0]/4096.f)*3.3f;
+	buck_out_current_adc = ((float)ADC_BUF[0]/4096.f)*3.3f;
+	pv_voltage = (((float)ADC_BUF[1]/4096.f)*3.3f) * ((5100000.+357000.)/357000.);
+	boost_out_voltage = ((float)ADC_BUF[2]/4096.f)*3.3f * ((10000000.+383000.)/383000.);
+	buck_out_voltage = ((float)ADC_BUF[4]/4096.f)*3.3f * ((1000000.+200000.)/200000.);
+	pv_current = 30.30303f*pv_current_adc - 50.f;
+	buck_out_current =  60.60606f*pv_current_adc - 100.f;
 }
 
 

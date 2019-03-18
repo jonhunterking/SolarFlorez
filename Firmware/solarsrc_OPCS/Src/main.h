@@ -3,7 +3,9 @@
 uint32_t ADC_BUF[5];
 
 float pv_current_adc = 0;
+float buck_out_current_adc = 0;
 float pv_current = 0;
+float buck_out_current = 0;
 float pv_voltage = 0;
 float buck_out_voltage = 0;
 float boost_out_voltage;
